@@ -29,5 +29,28 @@
  * @returns {number} Shipping cost, 0 for free shipping, or -1 for invalid input
  */
 export function calculateShipping(weight, country, orderTotal) {
-  // Your code here
+  if(typeof weight !=="number" || weight <=0|| typeof orderTotal !== "number" || orderTotal <0 || country === null || country === undefined || typeof country !== "string" || country.trim() === "" || weight === null || orderTotal === null || weight === undefined || orderTotal === undefined){
+    return -1;
+  }
+  const isDomestic = country.toUpperCase()=== "US";
+  if(isDomestic && orderTotal >50)
+  {
+    return 0;
+  }
+  if(!isDomestic && orderTotal >100)
+  {
+    return 0;
+  }
+  if(weight >0 && weight <= 1)
+  {
+    return isDomestic ? 5 : 15;
+  }
+  if(weight >1 && weight <= 5)
+  {
+    return isDomestic ? 10 : 25;
+  }
+  if(weight >5)
+  {
+    return isDomestic ? 15 : 40;
+  }
 }
